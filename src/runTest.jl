@@ -61,28 +61,28 @@ function print_latex_table(values,row_names::Vector{String},col_names::Vector{St
 	println("\\end{table}")
 end
 
-function p(gnn, feats,  zCR, instance,K)
+function p(gnn, x,  zCR, instance,K)
         sizek, sizev = sizeK(instance),sizeV(instance)
         nbpreds = prod(LearningPi.sizeLM(instance))
         device = cpu
 
-        @views h = (gnn.model[1](feats, feats.ndata.x))[:, 1:nbpreds]
-        μ, σ2 = MLUtils.chunk(h, 2; dims = 1)
+        idx = 1
+        sizes=cpu(x.gdata.u)
+        h = gnn.HiddenMap(x.ndata.x)
+        for i in 1:gnn.n_gr
+            h = gnn.Graphormers[i](x,h)
+            if gnn.where_sample.hidden_state 
+                h = gnn.Sampling(h)
+            end
+        end
 
-        σ2 = 2.0f0 .- softplus.(2.0f0 .- σ2)
-        σ2 = -6.0f0 .+ softplus.(σ2 .+ 6.0f0)
-
-        σ2 = exp.(σ2)
-        sigma = sqrt.(σ2)
         pred=[]
         for k in 1:K
-                ϵ = randn(gnn.rng, Float32, size(σ2)) |> gpu
-                z = μ + sigma .* ϵ
-
-                delta = reshape(gnn.model[2](z), sizek, sizev) |> device
-
+                z = gnn.Sampling(h)
+                delta = reshape(gnn.Decoders[1](z[:,1:prod(sizes)]), sizek, sizev) |> device
                 push!(pred, device(zCR) .+ device(delta))
         end
+
         return pred
 end
 
@@ -98,7 +98,7 @@ function fill_tables!(ds,dataset,factory,lt,fmt,nn1,crs,golds,lrs,predsK,preds,p
 		append!(golds,lab.objLR)
 
 		t0=time()
-        	pred = nn1(gpu( ϕ ))
+        	pred = cpu(nn1(gpu( ϕ )))
         	append!(preds_time,time()-t0)
                 append!(lrs,LR(inst,zeros(size(pred)))[1])
 		
@@ -118,11 +118,11 @@ function fill_tables!(ds,dataset,factory,lt,fmt,nn1,crs,golds,lrs,predsK,preds,p
 		tzK=[]
 		tLRK=[]
 		pK=[]
-		 t0=time()
-                pred  = p(nn1, ϕ |> gpu,model_device(feat.λ) ,inst,K) |> cpu
+		t0=time()
+                pred  = p(nn1, ϕ |> gpu,gpu(feat.λ) ,inst,K) |> cpu
                 append!(predsK_time,time()-t0)
                 for  k in 1:K                         
-                        t0=time()
+                        t0 = time()
                         obj,_ = LR(inst,pred[k])
                         append!(tLRK,time()-t0)
 
@@ -223,7 +223,7 @@ function main(args)
     
         @load model_path nn
         nn = nn |> gpu
-        nn1 = nn
+        nn1 = LearningPi.load_model(nn,lt)
         
         crs_train, lrs_train, golds_train = [],[],[]
         crs_val,   lrs_val,   golds_val   = [],[],[]
