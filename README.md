@@ -44,6 +44,13 @@ using Pkg;
 Pkg.instantiate();
 ```
 
+If you find some problem with the package Instances.jl you can install it using:
+
+ ```julia
+using Pkg
+Pkg.add(url="https://github.com/FDemelas/Instances")
+```
+
 then the package can be used 
 
 ```julia
