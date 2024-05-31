@@ -1,12 +1,8 @@
 # Learning_Lagrangian_Multipliers.jl
 
-
-
 This package provides the implementation of the learning framework presented in: 
 
-"Predicting Lagrangian Multipliers for Mixed Integer Linear Programs"
-
-Francesco Demelas, Joseph Le Roux, Mathieu Lacroix, Axel Parmentier 
+ F. Demelas, J. Le Roux, M. Lacroix, A. Parmentier "Predicting Lagrangian Multipliers for Mixed Integer Linear Programs", ICML 2024. 
 
 It depends on the package:
 
