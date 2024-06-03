@@ -7,7 +7,7 @@ DocMeta.setdocmeta!(LearningPi, :DocTestSetup, :(using LearningPi); recursive = 
 makedocs(;
     modules = [LearningPi],
     authors = "F. Demelas, M. Lacroix, J. Le Roux, A. Parmentier",
-    repo = "/-/blob/main/src/LearningPi.jl",
+    repo = "https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl/-/blob/main/src/LearningPi.jl",
     sitename = "LearningPi.jl",
     format = Documenter.HTML(;
         prettyurls = get(ENV, "CI", "false") == "true",
@@ -18,7 +18,7 @@ makedocs(;
         "Loss Functions" => "Loss.md",
 	"Machine Learning Models" => "Models.md",
 	"Sampling Mechanism" => "Sampling.md", 
-    "Training Scripts" => "Training.md", 
+        "Training Scripts" => "Training.md", 
         "API reference" => "api.md"
     ]
 )
