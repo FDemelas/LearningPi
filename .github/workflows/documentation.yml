@@ -21,7 +21,7 @@ jobs:
           version: '1.9'
       - uses: julia-actions/cache@v1
       - name: Install dependencies
-        run: julia --project=./docs/ -e 'using Pkg;Pkg.add(url="https://github.com/FDemelas/Instances"); Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate();'
+        run: julia --project=./docs/ -e 'using Pkg;Pkg.add(url="https://github.com/FDemelas/Instances");Pkg.add(url="https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl"); Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate();'
       - name: Build and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # If authenticating with GitHub Actions token
