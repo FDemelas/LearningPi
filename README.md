@@ -1,4 +1,7 @@
 # Learning_Lagrangian_Multipliers.jl
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://fdemelas.github.io/Learning_Lagrangian_Multipliers.jl/dev/)
+[![Documentation](https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl/actions/workflows/documentation.yml/badge.svg?branch=main)](https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl/actions/workflows/documentation.yml)
+
 
 This package provides the implementation of the learning framework presented in: 
 
