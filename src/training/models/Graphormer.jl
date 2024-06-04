@@ -1,3 +1,31 @@
+"""
+This structure provide an implementation of the main neural-network model of this project.
+
+# Fields:
+- `HiddenMap`: a `Chain` to map the features into the Hidden Space,
+- `Graphormers`: a `GNNChain` to apply several Graphormer Blocks to the hidden-features representation, each component can be seen as main-block of the model,
+- `Decoders`: a `Chain` of decoders, it should have the same size as the desired predictions,
+- `Sampling`: sampling function,
+- `n_gr`: number of main-blocks,
+- `train_mode`: if the model is in training mode or not, the main change is that if off we does not sample, but just take the mean,
+- `prediction_layers`: indexes of the main-blocks after which we want insert a Decoder to provide a Lagrangian Multipliers Prediction,
+- `where_sample`: a `SamplingPosition` to handle different possibilities of Sampling,
+- `only_last`: a boolean that says if we want only a single Lagragian Multipliers prediction associated to the last main-block
+- `dt`: deviation type.
+
+The constructor of this structure have the following 
+# Arguments:
+- `HiddenMap`: as in the Fields,
+- `Graphormers`: as in the Fields,
+- `Decoders`: as in the Fields,
+- `Sampling`:as in the Fields,
+- `where_sample`:as in the Fields,
+-  `prediction_layers`: as in the Fields, by default empty, in this case we predict only in the last Graphormers layers,
+- `dt`: as in the Fields, by default `cr_deviation`.
+
+This structure is declared as `Flux.functor` in order to efficiently and automatically implement the back-propagation.
+It can be called providing as input simply the graph-neural-network   (a `GNNGraph`). 
+"""
 mutable struct Graphormer <: AbstractModel
     HiddenMap::Chain
     Graphormers::GNNChain
@@ -21,10 +49,8 @@ mutable struct Graphormer <: AbstractModel
 end
 
 """
-function (m::Graphormer)(x)
-
 # Arguments:
-   - `x`: input of the NN model of type Graphormer    
+   - `x`: input of the NN model of type Graphormer  (a `GNNGraph`).  
 
 Forward computation of a Graphormer m, the output is the concatenation of all the multipliers predicted by the model   
 """
@@ -76,12 +102,17 @@ function (m::Graphormer)(x)
     end
 end
 
-
-# Call @functor to allow for training. Described below in more detail.
+# Call @functor to allow for training.
 Flux.@functor Graphormer
 
 import Flux: gpu
 
+"""
+# Arguments:
+- `m`: a `Graphormer` model.
+
+Extends the `gpu` function of `Flux` to be applied to `Graphormer` model.
+"""
 function gpu(m::Graphormer)
     m1 = deepcopy(m)
     m1.Decoders =  gpu(m.Decoders)
@@ -91,6 +122,13 @@ function gpu(m::Graphormer)
 end
 
 import Flux: cpu
+
+"""
+# Arguments:
+- `m`: a `Graphormer` model.
+
+Extends the `cpu` function of `Flux` to be applied to `Graphormer` model.
+"""
 function cpu(m::Graphormer)
     m1 = deepcopy(m)
     m1.Decoders =  cpu(m.Decoders)
@@ -99,6 +137,19 @@ function cpu(m::Graphormer)
     return m1
 end
 
+"""
+# Arguments:
+- `trainSet`: the (training) set,
+- `nn`: a model of type `Graphormer`,
+- `currentMetrics`: a dictionary that contains the metrix of the current iteration,
+- `opt`: an `Optimiser`,
+- `loss`: loss function,
+- `epoch`: the epcoh counter (this patameter is unsued in the current implementation and it will be soon removed), 
+- `lt`: learning type (this patameter is unsued in the current implementation and it will be soon removed),
+- `dt`: deviation type  (this patameter is unsued in the current implementation and it will be soon removed).
+
+This function performs the forward and backward pass for the model `nn` over all the (training) set `trainSet`.
+"""
 function forwardBackward(trainSet, nn::Graphormer, currentMetrics, opt,loss,  epoch::Int, lt::learningType, dt::abstract_deviation)
 	nInst = length(trainSet)
 	currentMetrics["loss training"] = 0
@@ -140,17 +191,22 @@ function forwardBackward(trainSet, nn::Graphormer, currentMetrics, opt,loss,  ep
 end
 
 """
-get_model(nn::GNNChain)
+# Arguments:
+	-`nn`: neural network model of type `Graphormer`.
 
-#Arguments:
-	-`nn`: neural network model
-
-returns a cpu version of the model that can be saved using a bson file.    
+Returns a cpu version of the model that can be saved using a bson file.    
 """
 function get_model(nn::Graphormer)
 	return cpu(nn)
 end
 
+"""
+# Arguments:
+	-`nn`: neural network model of type `Graphormer`,
+    -`lt`: learning type (of type `learningGNN`).
+
+In this case only returns the model `nn`.
+"""
 function load_model(nn::Graphormer,lt::learningGNN)
 	return nn
 end

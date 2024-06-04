@@ -1,3 +1,12 @@
+"""
+Structure to encode the examples for the training when we whant use a GNN model.
+
+# Fields:
+- `instance`: an instance,
+- `features`: the features associated to the instance,	
+- `gold`: the labels
+- `linear_relaxation`: the Lagrangian Subproblem value associated to the dual variable of the continuous relaxation.
+"""
 mutable struct example_gnn <: abstract_example
 	instance::Any
 	features::Any
@@ -5,13 +14,14 @@ mutable struct example_gnn <: abstract_example
 	linear_relaxation::Any
 end
 
+"""
+Structure to encode the dataset composed by `example_gnn`.
+"""
 mutable struct gnn_dataset <: abstract_dataset
 	examples_list::Vector{example_gnn}
 end
 
 """
-createEmptyDataset(lt::learningGNN)
-
 # Arguments:
 - `lt`: learning Multi Layer Perceptron type.
 
@@ -22,14 +32,12 @@ function createEmptyDataset(lt::learningGNN)
 end
 
 """
-create_example(lt::learningGNN, fileName::String, factory::abstractInstanceFactory)
-
-#Arguments:
+# Arguments:
 - `lt`: learning Type, this function works for all the learning types that use a graph representation of the instance
 - `fileName`: path to the json that contains all the information to construct the learning sample starting from an instance, its features and the labels.
 - `factory`: instance factory, it works for all the factory
 
-returns an gnnExample_instance with all the information useful for the training.
+returns an `gnnExample_instance` with all the information useful for the training.
 """
 function create_example(lt::learningGNN, fileName::String, factory::abstractInstanceFactory, fmt::abstract_features_matrix)
 	instance, gold, featuresObj = dataLoader(fileName, factory)
@@ -39,9 +47,7 @@ function create_example(lt::learningGNN, fileName::String, factory::abstractInst
 end
 
 """
-function createDataSet(lt::learningGNN, directory::String, maxInstance::Int64=-1, factory::abstractInstanceFactory)
-
-	#Arguments:
+# Arguments:
 		- `lt`:learning type, it should be a sub-type learningGNN 
 		- `directory`: the path to the directory containing instances
 		- `maxInstance`: maximum instance number 
@@ -59,6 +65,12 @@ function createDataSet(lt::learningGNN, fmt::abstract_features_matrix, directory
 		map((index, file) -> create_example(lt, directory * file, factory, fmt), l))
 end
 
+"""
+# Arguments:
+- `lt`: learning type, it should be a sub-type of `learningGNN`
+- `dS`: a dataset
+returns the size of the features matrix.
+"""
 function sizeFeatures(lt::learningGNN, dS)
 	return size(dS.train.examples_list[1].features.ndata.x, 1)
 end
