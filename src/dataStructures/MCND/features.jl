@@ -33,9 +33,7 @@ struct featuresMCND
 end
 
 """
-function create_features(ins::cpuInstanceMCND)
-
-#Arguments:
+# Arguments:
   - `ins`: instance structure, should be of type cpuInstanceMCND
 
 """
@@ -59,9 +57,7 @@ function create_features(ins::cpuInstanceMCND)
 end
 
 """
-function features_matrix(ins::instanceMCND, featObj::featuresMCND, fmt::abstract_features_matrix)
-
-#Arguments:
+# Arguments:
 - `ins`: instance structure, it should be a sub-type of abstractInstanceMCND
 - `featObj`: features object containing all the characteristics 
 - `fmt`: features matrix type.
@@ -79,18 +75,18 @@ function features_matrix(ins::abstractInstanceMCND, featObj::featuresMCND, fmt::
 	isGeq = true
 	isLeq = true
 	isDualized = true
-	
-	λ0 = zeros(K,V) # randn?
 
-	obj, xLR0, yLR0 = ( typeof(fmt) == lr_features_matrix ) ? LR(ins,λ0) : (0, zeros(size(featObj.xCR)), zeros(size(featObj.yCR)))
-    	μ0 = ( typeof(fmt) == lr_features_matrix )  ? sum( xLR0,dims=1) - ins.c' : zeros(size(featObj.yCR))
-	
+	λ0 = zeros(K, V) # randn?
+
+	obj, xLR0, yLR0 = (typeof(fmt) == lr_features_matrix) ? LR(ins, λ0) : (0, zeros(size(featObj.xCR)), zeros(size(featObj.yCR)))
+	μ0 = (typeof(fmt) == lr_features_matrix) ? sum(xLR0, dims = 1) - ins.c' : zeros(size(featObj.yCR))
+
 
 
 	current_idx = 1
 	for i in 1:V
 		for k in 1:K
-			f[1:sizeFC, current_idx] = vcat(get_cr_features(fmt, featObj.λ[k, i], featObj.λSP[k, i], λ0[k,i]), Float32[b(ins, i, k), isGeq, isLeq, isDualized])
+			f[1:sizeFC, current_idx] = vcat(get_cr_features(fmt, featObj.λ[k, i], featObj.λSP[k, i], λ0[k, i]), Float32[b(ins, i, k), isGeq, isLeq, isDualized])
 			current_idx += 1
 		end
 	end
@@ -99,14 +95,14 @@ function features_matrix(ins::abstractInstanceMCND, featObj::featuresMCND, fmt::
 
 	for e in 1:E
 		for k in 1:K
-			f[sizeFC+1:(sizeFV+sizeFC), current_idx] = vcat(get_cr_features(fmt, featObj.xCR[k, e], featObj.xRC[k, e], xLR0[k,e]), Float32[routing_cost(ins, e, k), isInteger])
+			f[sizeFC+1:(sizeFV+sizeFC), current_idx] = vcat(get_cr_features(fmt, featObj.xCR[k, e], featObj.xRC[k, e], xLR0[k, e]), Float32[routing_cost(ins, e, k), isInteger])
 			current_idx += 1
 		end
 	end
 
 	isInteger = true
 	for e in 1:E
-		f[(sizeFV+sizeFC+1):(2*sizeFV+sizeFC), current_idx] = vcat(get_cr_features(fmt, featObj.yCR[e], featObj.yRC[e], yLR0[e]),  Float32[ fixed_cost(ins, e), isInteger])
+		f[(sizeFV+sizeFC+1):(2*sizeFV+sizeFC), current_idx] = vcat(get_cr_features(fmt, featObj.yCR[e], featObj.yRC[e], yLR0[e]), Float32[fixed_cost(ins, e), isInteger])
 		current_idx += 1
 	end
 
@@ -114,17 +110,15 @@ function features_matrix(ins::abstractInstanceMCND, featObj::featuresMCND, fmt::
 	isLeq = true
 	isDualized = false
 	for e in 1:E
-		f[(sizeF-sizeFC+1):end, current_idx] = vcat(get_cr_features(fmt, featObj.μ[e], featObj.μSP[e],μ0[e]),Float32[capacity(ins, e), isGeq, isLeq, isDualized])
+		f[(sizeF-sizeFC+1):end, current_idx] = vcat(get_cr_features(fmt, featObj.μ[e], featObj.μSP[e], μ0[e]), Float32[capacity(ins, e), isGeq, isLeq, isDualized])
 		current_idx += 1
-	end	
+	end
 
 	return f
 end
 
 """
-function featuresExtraction(lt::learningGNN, featObj, ins::abstractInstanceMCND)
-
-Arguments:
+# Arguments:
 - `lt`: learnign type, it should be a sub-type of learningGNN
 - `featObj`: features object containing all the characteristics 
 - `ins`: instance structure, it should be a sub-type of abstractInstanceMCND
@@ -162,11 +156,11 @@ function featuresExtraction(lt::learningType, featObj, ins::abstractInstanceMCND
 		for k in 1:K
 			tails[tmp] = nodesx[k+K*(e-1)]
 			heads[tmp] = nodesCC[e]
-			weightsE[tmp] = preprocess_weight(fmt,1)
+			weightsE[tmp] = preprocess_weight(fmt, 1)
 			tmp += 1
 			tails[tmp] = nodesCC[e]
 			heads[tmp] = nodesx[k+K*(e-1)]
-			weightsE[tmp] = preprocess_weight(fmt,1)
+			weightsE[tmp] = preprocess_weight(fmt, 1)
 			tmp += 1
 		end
 	end
@@ -177,29 +171,29 @@ function featuresExtraction(lt::learningType, featObj, ins::abstractInstanceMCND
 		for k in 1:K
 			tails[tmp] = nodesx[k+K*(e-1)]
 			heads[tmp] = nodesFC[k+K*(i-1)]
-			weightsE[tmp] = preprocess_weight(fmt,1)
+			weightsE[tmp] = preprocess_weight(fmt, 1)
 			tmp += 1
 
 			tails[tmp] = nodesFC[k+K*(i-1)]
 			heads[tmp] = nodesx[k+K*(e-1)]
-			weightsE[tmp] = preprocess_weight(fmt,1)
+			weightsE[tmp] = preprocess_weight(fmt, 1)
 			tmp += 1
 
 			tails[tmp] = nodesx[k+K*(e-1)]
 			heads[tmp] = nodesFC[k+K*(j-1)]
-			weightsE[tmp] = preprocess_weight(fmt,-1)
+			weightsE[tmp] = preprocess_weight(fmt, -1)
 			tmp += 1
 
 			tails[tmp] = nodesFC[k+K*(j-1)]
 			heads[tmp] = nodesx[k+K*(e-1)]
-			weightsE[tmp] = preprocess_weight(fmt,-1)
+			weightsE[tmp] = preprocess_weight(fmt, -1)
 			tmp += 1
 		end
 	end
 
 	f = features_matrix(ins, featObj, fmt)
 
-	g = GNNGraph(tails, heads, weightsE, ndata = f, gdata = [sizeK(ins),sizeV(ins)])
+	g = GNNGraph(tails, heads, weightsE, ndata = f, gdata = [sizeK(ins), sizeV(ins)])
 
 	return add_self_loops(g)
 end

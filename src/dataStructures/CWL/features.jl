@@ -1,6 +1,7 @@
 """
-Features structure for the Bin Packing instance.
-#Fields:
+Features structure for the Capacitated Warehouse Location instance.
+
+# Fields:
 -`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack.
 -`yCR`: primal solution of the Linear Relaxation associated to the variables say if we use or not a pack.
 -`λ`: dual solution of the Linear Relaxation associated to the packing constraints.
@@ -26,10 +27,8 @@ struct featuresCWL
 end
 
 """
-function create_features(ins::instanceCWL)
-
-	#Arguments:
-		- `ins`: instance object, it should be of type instanceCWL 
+# Arguments:
+	- `ins`: instance object, it should be of type instanceCWL 
 
 	solve the Continuous Relaxation and the Lagrangian Sub-Problem considering as Lagrangian Multipliers
 	the dual variables associated to the relaxed constraints and then returns a features structure.
@@ -43,9 +42,7 @@ function create_features(ins::instanceCWL)
 end
 
 """
-function features_matrix(ins::instanceCWL,featObj, fmt::abstract_features_matrix)
-
-#Arguments:
+# Arguments:
 - `ins`: instance structure, it should be a sub-type of instanceCWL
 - `featObj`: features object containing all the characteristics 
 - `fmt`: features matrix type.
@@ -103,9 +100,7 @@ function features_matrix(ins::instanceCWL, featObj, fmt::abstract_features_matri
 end
 
 """
-function featuresExtraction(lt::learningType, featObj, ins::instanceCWL,fmt::abstract_features_matrix)
-
-#Arguments:
+# Arguments:
 - `lt`: learnign type, it should be a sub-type of learningType
 - `featObj`: features object containing all the characteristics 
 - `ins`: instance structure, it should instanceCWL

@@ -1,11 +1,9 @@
 """
-dataLoader(fileName::String, factory::cpuGAinstanceFactory)
-
 # Arguments
 	- `fileName` : a path to a json file that contains the data for the instance, features and labels
-	- `factory` : an instance factory for the Bin Packing problem
+	- `factory` : an instance factory for the Generalized Assignment problem
 
-It reads the instance, the features and the labels from the json and returns three structures that contains all the informations.
+This function reads the instance, the features and the labels from the json and returns three structures that contains all the informations.
 """
 function dataLoader(fileName::String, factory::cpuGAinstanceFactory)
 	ds = JSON.parsefile(fileName)
@@ -55,10 +53,8 @@ function dataLoader(fileName::String, factory::cpuGAinstanceFactory)
 end
 
 """
-function print_json(ins::instanceGA, lab::labelsGA, feat::featuresGA, fileName::String)
-
-#Arguments:    
--`ins`: instance structure, it should be of type <: instanceGA
+# Arguments:    
+- `ins`: instance structure, it should be of type <: instanceGA
 - `lab`: labels structure, it should be of type labelsGA
 - `feat`: features structure, it should be of type featuresGA
 - `fileName`: the path to the file json where print the data

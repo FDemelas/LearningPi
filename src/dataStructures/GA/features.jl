@@ -1,6 +1,6 @@
 """
-Features structure for the Bin Packing instance.
-#Fields:
+Features structure for the Generalized Assignment instance.
+# Fields:
 -`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack.
 -`λ`: dual solution of the Linear Relaxation associated to the packing constraints.
 -`μ`: dual solution of the Linear Relaxation associated to the packing constraints.
@@ -21,9 +21,7 @@ struct featuresGA
 end
 
 """
-function create_features(ins::instanceGA)
-
-	#Arguments:
+# Arguments:
 		- `ins`: instance object, it should be of type instanceGA 
 
 	read the features and returns a features structure.
@@ -37,9 +35,7 @@ function create_features(ins::instanceGA)
 end
 
 """
-function features_matrix(ins::instanceGA,featObj, fmt::abstract_features_matrix)
-
-#Arguments:
+# Arguments:
 - `ins`: instance structure, it should be a sub-type of instanceGA
 - `featObj`: features object containing all the characteristics 
 - `fmt`: features matrix type.
@@ -91,9 +87,7 @@ function features_matrix(ins::instanceGA,featObj, fmt::abstract_features_matrix)
 end
 
 """
-function featuresExtraction(lt::learningType, featObj, ins::instanceGA, fmt::abstract_features_matrix)
-
-#Arguments:
+# Arguments:
 - `lt`: learnign type, it should be a sub-type of learningType
 - `featObj`: features object containing all the characteristics 
 - `ins`: instance structure, it should instanceGA

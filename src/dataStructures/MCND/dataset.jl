@@ -1,6 +1,4 @@
 """
-dataLoader(fileName::String, factory::MCNDnstanceFactory)
-
 # Arguments
 	- `fileName` : a path to a json file that contains the data for the instance, features and labels
 	- `factory` : an instance object (for the same instance as the features file)
@@ -51,9 +49,7 @@ function dataLoader(fileName::String, factory::MCNDinstanceFactory)
 end
 
 """
-function print_json(ins::cpuInstanceMCND, lab, feat, fileName,factory::cpuMCNDinstanceFactory)
-
-#Arguments:    
+# Arguments:    
 - `ins`: instance structure, it should be of type CWLinstance
 - `lab`: labels structure, it should be of type labelsMCND
 - `feat`: features structure, it should be of type featuresMCND

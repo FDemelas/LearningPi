@@ -1,9 +1,7 @@
 """
-dataLoader(fileName::String, factory::cpuCWLinstanceFactory)
-
 # Arguments
 	- `fileName` : a path to a json file that contains the data for the instance, features and labels
-	- `factory` : an instance factory for the Bin Packing problem
+	- `factory` : an instance factory for the Capacitated Warehouse Location problem
 
 It reads the instance, the features and the labels from the json located in `fileName` and returns three structures that contains all the informations.
 """
@@ -58,9 +56,7 @@ function dataLoader(fileName::String, factory::cpuCWLinstanceFactory)
 end
 
 """
-function print_json(ins::instanceCWL, lab::labelsCWL, feat::featuresCWL, fileName::String)
-
-#Arguments:    
+# Arguments:    
 -`ins`: instance structure, it should be of type <: instanceCWL
 - `lab`: labels structure, it should be of type labelsCWL
 - `feat`: features structure, it should be of type featuresCWL

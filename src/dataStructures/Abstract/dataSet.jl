@@ -18,8 +18,6 @@ struct Corpus
 end
 
 """
-	createDataSet(lt::learningType, directory, maxInstance::Int64=-1,factory::abstractInstanceFactory=cpuMCNDinstanceFactory())
-
 # Arguments:
 - `lt`: the learning type.
 - `directory`: a list of paths to the instances.
@@ -31,7 +29,7 @@ return a dataSet structure of a proper type.
 """
 function createDataSet(lt::learningType, fmt::abstract_features_matrix, directory, maxInstance::Int64 = -1, factory::abstractInstanceFactory = cpuMCNDinstanceFactory())
 	dS = createEmptyDataset(lt)
-	
+
 	for (index, file) in enumerate(directory)
 		push!(dS.examples_list, @views create_example(lt, file, factory, fmt))
 
@@ -43,8 +41,6 @@ function createDataSet(lt::learningType, fmt::abstract_features_matrix, director
 end
 
 """
-createCorpus(featType::learningType, folder::String, maxInstance::Vector{Int64}=[-1, -1, -1],seed::Int64=0;factory::abstractInstanceFactory=cpuMCNDinstanceFactory(),pTrain::Float32=0.8,pVal::Float32=0.1)
-
 # Arguments:
 
 - `featType` : the type of the features instance.
@@ -63,7 +59,7 @@ function createCorpus(featType::learningType, fmt::abstract_features_matrix, fol
 	directory = folder .* readdir(folder)
 
 	shuffle!(directory)
-	
+
 	eT = round(Int64, length(directory) * pTrain)
 	eV = round(Int64, length(directory) * (pTrain + pVal))
 	trainInstances = @views directory[1:eT]
@@ -89,8 +85,6 @@ end
 
 
 """
-createKfold(featType::learningType, folder::String, maxInstance::Vector{Int64}=[-1, -1, -1],seed::Int64=0;factory::abstractInstanceFactory=cpuMCNDinstanceFactory(),k::Int64=1)
-
 # Arguments:
 - `featType` : the type of the features instance.
 - `folder` : the path to the directory that contains the json files that defines the instances (and the associated features and labels).
@@ -139,9 +133,7 @@ function createKfold(featType::learningType, fmt::abstract_features_matrix, fold
 end
 
 """
-function gap(example::abstract_example, objPred::Real, objGold::Real, nInst::Real)
-
-#Arguments:
+# Arguments:
 - `example`: the current example (dataset point).
 - `objPred`: the current obective for the example.
 - `objGold`: the optimal value of the Lagrangian Dual.
@@ -158,9 +150,7 @@ end
 
 
 """
-function gap(example::abstract_example, objPred::Real, objGold::Real, nInst::Real)
-
-#Arguments:
+# Arguments:
 - `example`: the current example (dataset point).
 - `objPred`: the current obective for the example.
 - `objGold`: the optimal value of the Lagrangian Dual.
