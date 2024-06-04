@@ -3,9 +3,7 @@ abstract type abstract_loss end
 abstract type abstract_loss_factory end
 
 """
-function get_device(los::abstract_loss)
-
-	#Arguments:
+# Arguments:
 	- `_`: the loss parameters
 
 	returns the device (cpu/gpu) used to compute the loss.
@@ -17,9 +15,7 @@ end
 
 
 """
-function sub_problem_value(_, v, example, _::abstract_loss)
-
-#Arguments:
+# Arguments:
 - `_`: lagrangian multipliers vector candidate, 
 - `v`: the value of the loss function,
 - `example`: dataset sample object,
@@ -39,9 +35,7 @@ end
 
 
 """
-function gradient_lsp( x, ins::cpuInstanceMCND)
-
-	#Arguments:
+# Arguments:
 	- `x`: the solution of the Lagrangian Sub-problem
 	- `ins`: a cpuInstanceMCND structure
 
@@ -59,9 +53,7 @@ end
 
 
 """
-function gradient_lsp( x, ins::cpuInstanceGA)
-
-	#Arguments:
+# Arguments:
 	- `x`: the solution of the Lagrangian Sub-problem
 	- `ins`: a cpuInstanceCWL structure
 
@@ -75,17 +67,20 @@ function gradient_lsp(x::AbstractVecOrMat,ins::cpuInstanceGA)
     return -grad
 end
 
+"""
+# Arguments:
+	- `x`: the solution of the Lagrangian Sub-problem
+	- `ins`: a cpuInstanceCWL structure
 
-
+This function compute and returns the gradient of the sub-problem objective function w.r.t. the Lagrangian Multipliers.
+"""
 function gradient_lsp(x::AbstractVecOrMat, ins::gpuMCNDinstance)
 	return x * ins.E - ins.B
 end
 
 
 """
-function gradient_lsp( x, ins::cpuInstanceCWL)
-
-	#Arguments:
+# Arguments:
 	- `x`: the solution of the Lagrangian Sub-problem
 	- `ins`: a cpuInstanceCWL structure
 
