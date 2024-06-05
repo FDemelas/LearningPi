@@ -54,11 +54,12 @@ end
 
 """
 # Arguments:    
-- `ins`: instance structure, it should be of type <: instanceGA
-- `lab`: labels structure, it should be of type labelsGA
-- `feat`: features structure, it should be of type featuresGA
-- `fileName`: the path to the file json where print the data
+- `ins`: instance structure, it should be of type <: instanceGA,
+- `lab`: labels structure, it should be of type labelsGA,
+- `feat`: features structure, it should be of type featuresGA,
+- `fileName`: the path to the file json where print the data.
 
+Print in a `JSON` format the information contained in `ins`,`feat` and `lab`, in a file in `fileName`.
 """
 function print_json(ins::instanceGA, lab::labelsGA, feat::featuresGA, fileName::String)
 	ds = Dict()

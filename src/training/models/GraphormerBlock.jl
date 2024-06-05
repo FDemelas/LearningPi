@@ -6,8 +6,9 @@ Structure that implement the basic main machine-learning block of this .
 - `MLP`: a Multi-Layer-Perceptron that implement the non-linear part in parallel over all the node-hidden-features. 
 
 The first constructor takes as input the following
+
 # Arguments:
-- `hidden_sample`: ,
+- `hidden_sample`: a structure composed by three boolean fields to handle the sampling positions in the  model,
 - `inpOut`: the size  of the hidden space, 
 - `init`: initialization for the parameters of the models,
 - `rng`: random number generator for the sampler, dropout, and all the other random components of the model,
@@ -15,8 +16,8 @@ The first constructor takes as input the following
 - `h_MLP`: a vector containing at each component the number of nodes in the associated layer of the hidden multi-layer-perceptron,
 - `ConvLayer`: convolutional layer, by default is `GraphConv`,
 - `act`: activation function for the Multi-Layer-Perceptron, by default is `relu`,
-- `act_conv`: activation function for the Graph Convolutional Part, by default is  `identity`.
-- `aggr`: aggregation function for the Graph Convolutional Part, by default is `mean`
+- `act_conv`: activation function for the Graph Convolutional Part, by default is  `identity`,
+- `aggr`: aggregation function for the Graph Convolutional Part, by default is `mean`.
 
 The second constructor directly takes as input the Fields of the structure.
 """

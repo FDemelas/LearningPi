@@ -16,7 +16,7 @@ struct zero_deviation <: abstract_deviation end
 
 """
 # Arguments:
-- `x`: the bipartite-graph representation of the instance
+- `x`: the bipartite-graph representation of the instance.
 
 Returns the dual variables associated to the dualized constraints in the optimal solution of the continuous relaxation,
 taking the good components from the nodes features matrix in the bipartite-graph representation.
@@ -29,7 +29,7 @@ end
 
 """
 # Arguments:
-- `x`: the bipartite-graph representation of the instance
+- `x`: the bipartite-graph representation of the instance.
 
 For the `cr_deviation` it returns the dual variables associated to the dualized constraints in the optimal solution of the continuous relaxation,
 taking the good components from the nodes features matrix in the bipartite-graph representation.
@@ -41,7 +41,7 @@ end
 
 """
 # Arguments:
-- `x`: the bipartite-graph representation of the instance
+- `x`: the bipartite-graph representation of the instance.
 
 For the `zero_deviation` it returns an all-zeros vector with the correct size.
 The size will be the same as the dual variables associated to the dualized constraints in the optimal solution of the continuous relaxation,

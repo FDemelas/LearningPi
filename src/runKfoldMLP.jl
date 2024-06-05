@@ -128,10 +128,9 @@ lossFromParams(lossType::String,lossParams::Vector{Float32})
 
 Construct a loss object taking as inputs a string for the loss type and a vector for the loss parameters.
 
-#Arguments:
-- `lossType`: a string to indicate the loss type. The possible choices are: hingeMSE,ZKRloss,SVR,hingeZKR,pertZKRadd and SVR
-- `lossParams`: a vector of float with the same size of the parameters required for the chosen loss,
-			  see the documentation of the loss strucures to know more about it.
+# Arguments:
+- `lossType`: a string to indicate the loss type. The possible choices are: hingeMSE,ZKRloss,SVR,hingeZKR,pertZKRadd and SVR,
+- `lossParams`: a vector of float with the same size of the parameters required for the chosen loss, see the documentation of the loss strucures to know more about it.
 """
 function lossFromParams(lossType::String, lossParams::Vector{Float32})
 	if lossType == "GAPloss"

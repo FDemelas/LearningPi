@@ -12,7 +12,7 @@ end
 
 """
 # Arguments:
-- `x` a vector (of length even), the first half components are the mean `μ` and the last hals the standard deviation σ.
+- `x` a vector (of length even), the first half components are the mean `μ` and the last hals the standard deviation `σ`.
 
 The standard deviation is bounded in [-6,2] ... magic numbers.
 The output is a vector of size half the size of `x` sampled from a gaussian of mean `μ` and standard deviation `σ`. 
@@ -36,8 +36,8 @@ Structure that handle the position in the model where is performed the sample.
 For the moment only three alternative are available and are encoded in boolean fields.
 
 # Fields:
-- `outside`: if true the sampling is performed in the output space.
-- `hidden_state`: in all the hidden states between two main blocks.
+- `outside`: if true the sampling is performed in the output space,
+- `hidden_state`: in all the hidden states between two main blocks,
 - `before_decoding`: in the hidden space, but only before call the decoder. 
 """
 struct SamplingPosition

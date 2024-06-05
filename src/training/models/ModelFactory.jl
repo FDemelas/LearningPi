@@ -12,9 +12,9 @@
 - `hH`:   a vector containing the number of nodes in the hidden layers that composes the  MLP inside the main-blocks of the Encoder, by default `[500]` ,
 - `hF`:  a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `pDrop`: drop-out parameter, by default  `0.001`,
-- `dt` : deviation type, by default  cr_deviation(),
+- `dt` : deviation type, by default  `cr_deviation()`,
 - `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
 - `aggr`: the aggregation function, by default `mean`,
 - `prediction_layers`: a vector that contains the indexes of the layers in which we want perform a prediction, by default `[]`, in this case we use the decoder only in the last main-block of the Graphormer.
 
@@ -89,13 +89,13 @@ end
 - `hH`:   a vector containing the number of nodes in the hidden layers that composes the  MLP inside the main-blocks of the Encoder, by default `[500]` ,
 - `hF`:  a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `pDrop`: drop-out parameter, by default  `0.001` (unused in this implementation, will be removed soon),
-- `dt` : deviation type, by default  cr_deviation(),
+- `dt` : deviation type, by default  `cr_deviation()`,
 - `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
 - `aggr`: the aggregation function, by default `mean`,
 - `prediction_layers`: a vector that contains the indexes of the layers in which we want perform a prediction, by default `[]`, in this case we use the decoder only in the last main-block of the Graphormer.
 
-returns a model as defined in `Graphormer.jl` using the provided hyper-parameters.
+Return a model as defined in `Graphormer.jl` using the provided hyper-parameters.
 """
 function create_model_gasse(
 	where_sample,
@@ -170,9 +170,9 @@ end
 - `hH`:   a vector containing the number of nodes in the hidden layers that composes the  MLP inside the main-blocks of the Encoder, by default `[500]` ,
 - `hF`:  a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `pDrop`: drop-out parameter, by default  `0.001` (unused in this implementation, will be removed soon),
-- `dt` : deviation type, by default  cr_deviation(),
+- `dt` : deviation type, by default  `cr_deviation()`,
 - `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`;
 - `aggr`: the aggregation function, by default `mean`,
 - `prediction_layers`: a vector that contains the indexes of the layers in which we want perform a prediction, by default `[]`, in this case we use the decoder only in the last main-block of the Graphormer.
 
@@ -300,11 +300,11 @@ struct learningMultiPredSample <: learningBlockGNN end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningMultiPredSample` and the other provided hyper-parameters.
 """
@@ -342,11 +342,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningMultiPredTransformer` and the other provided hyper-parameters.
 """
@@ -383,11 +383,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningSampleTransformer` and the other provided hyper-parameters.
 """
@@ -424,11 +424,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningSampleGasse` and the other provided hyper-parameters.
 """
@@ -466,11 +466,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningSampleNair` and the other provided hyper-parameters.
 """
@@ -507,11 +507,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningTransformer` and the other provided hyper-parameters.
 """
@@ -548,11 +548,11 @@ end
 - `hF`: a vector containing the number of nodes in the hidden layers that composes the final MLP in the Decoder, by default `[500, 250, 100]`,
 - `block_number`: number of main-blocks that compose the core part of the encoder, by default `5`,
 - `nodes_number`: dimension of the hidden-space for the features representation, by default `500`,
-- `pDrop`: drop-out parameter, by default 0.001,
-- `dt` : deviation type, by default  cr_deviation(),
-- `std`: standard deviation used for the initialization of the nn parameters, by default 0.00001,
-- `norm`: a boolean to say if normalize or not during the GNN message passing, by default true;
-- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default identity
+- `pDrop`: drop-out parameter, by default `0.001`,
+- `dt` : deviation type, by default  `cr_deviation()`,
+- `std`: standard deviation used for the initialization of the nn parameters, by default `0.00001`,
+- `norm`: a boolean to say if normalize or not during the GNN message passing, by default `true`,
+- `final_A`: final activation function (in the space of Lagrangian multipliers, but before deviation), by default `identity`.
 
 Returns the neural network model for `learningSampleOutside` and the other provided hyper-parameters.
 """

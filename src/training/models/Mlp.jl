@@ -61,8 +61,8 @@ end
 
 """
 # Arguments:
-- `ins`: instance structure
-- `varFeatures`: features matrix for the variables of the problem.
+- `ins`: instance structure,
+- `varFeatures`: features matrix for the variables of the problem,
 - `G`: adjaciency matrix that have a one in the position for the couple (variable, constraint) if and only if the variable is used in the constraint.
 
 Returns the features associated to the dualized constraint of the instance `ins` obtained by an aggregation of `varFeatures` with respect to the neighbourhoods induced by the adjaciency matrix `G`.
@@ -112,8 +112,8 @@ end
 
 """
 # Arguments:
-- lt: learning type, it should be learningMLP.
-- fileName: the name of the file json that contains the informations about the instance, its features and its labels.
+- lt: learning type, it should be learningMLP,
+- fileName: the name of the file json that contains the informations about the instance, its features and its labels,
 - factory: type of instance (it handle both with the normalized and un-normalized instances).
 
 Create a structure containing the instance, the extracted features and the associated labels.
@@ -127,16 +127,15 @@ end
 
 """
 # Arguments:
-
-- `loss`: a structure that contains the parameters α and β of the loss.
-- `trainSet`: the training dataset structure.
-- `nn`: the neural network model.
-- `currentMetrics`: a dictionary of Float 
-- `opt`: the optimizer used for the training.
-- `loss`: the loss function
-- `epoch`: the current epoch.
-- `lt`: learning type object.   
-- `dt`: deviation type (0 or duals of the continuous relaxation)
+- `loss`: a structure that contains the parameters α and β of the loss,
+- `trainSet`: the training dataset structure,
+- `nn`: the neural network model,
+- `currentMetrics`: a dictionary of Float, 
+- `opt`: the optimizer used for the training,
+- `loss`: the loss function,
+- `epoch`: the current epoch,
+- `lt`: learning type object,   
+- `dt`: deviation type (0 or duals of the continuous relaxation).
 
 This function performs the forward-backward pass for the training considering a generic loss and a generic learning type.
 """
@@ -174,7 +173,7 @@ end
 
 """
 # Arguments:
-- `x`: a GPU features vector
+- `x`: a GPU features vector.
 
 Return the dual variables of the CR associated to the dualized constraints. 
 """
@@ -184,7 +183,7 @@ end
 
 """
 # Arguments:
-	-`nn`: neural network model
+	-`nn`: neural network model,
 	-`lt`: learning type (of type `learningMLP`).
 
 In this case only returns the model `nn`.
@@ -226,9 +225,9 @@ end
 
 """
 # Arguments:
--`ins`: an instances (of type `abstractInstanceMCND`),
+-`ins`: an instances (of type `abstractInstanceMCND`).
 
-return the adjaciency matrix associated to the dualized constrants and the variables nodes in the bipartite graph representation.
+Return the adjaciency matrix associated to the dualized constrants and the variables nodes in the bipartite graph representation.
 The component associated to a couple `(constraint,variable)` is equal to `1` if and only if the `variable` has non-null coefficient in `constraint`.
 Otherwise is zero.
 """
@@ -360,7 +359,7 @@ end
 
 """
 # Arguments:
-	-`ins`: an instances (of type `instanceCWL`).
+	-`ins`: an instances (of type `instanceCWL`),
 	- `k`: useless parameter, only for signature,
 	- `i`: warehouse index.
 
@@ -390,7 +389,7 @@ end
 
 """
 # Arguments:
--`ins`: an instances (of type `instanceCWL`).	
+-`ins`: an instances (of type `instanceCWL`),
 - `featObj`: features encoded in an apposite structure,
 - `G`: adjaciency matrix that have a one in the position for the couple (variable, constraint) if and only if the variable is used in the constraint.
 

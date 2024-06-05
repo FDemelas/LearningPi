@@ -1,7 +1,7 @@
 """
 # Arguments
-	- `fileName` : a path to a json file that contains the data for the instance, features and labels
-	- `factory` : an instance factory for the Capacitated Warehouse Location problem
+	- `fileName` : a path to a json file that contains the data for the instance, features and labels,
+	- `factory` : an instance factory for the Capacitated Warehouse Location problem.
 
 It reads the instance, the features and the labels from the json located in `fileName` and returns three structures that contains all the informations.
 """
@@ -57,10 +57,10 @@ end
 
 """
 # Arguments:    
--`ins`: instance structure, it should be of type <: instanceCWL
-- `lab`: labels structure, it should be of type labelsCWL
-- `feat`: features structure, it should be of type featuresCWL
-- `fileName`: the path to the file json where print the data
+-`ins`: instance structure, it should be of type  of `instanceCWL`,
+- `lab`: labels structure, it should be of type `labelsCWL`,
+- `feat`: features structure, it should be of type `featuresCWL`,
+- `fileName`: the path to the file json where print the data.
 
 Print the information provided in the instance `ins`, the labels `lab` and the features `feat` in a JSON file located in the path `fileName`.
 """

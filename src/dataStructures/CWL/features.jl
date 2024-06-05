@@ -2,13 +2,13 @@
 Features structure for the Capacitated Warehouse Location instance.
 
 # Fields:
--`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack.
--`yCR`: primal solution of the Linear Relaxation associated to the variables say if we use or not a pack.
--`λ`: dual solution of the Linear Relaxation associated to the packing constraints.
--`μ`: dual solution of the Linear Relaxation associated to the packing constraints.
--`objCR`: objective value of the Linear Relaxation.
--`xLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the dual variables λ of the linear relaxation).
--`yLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables say if we use or not a pack (using the dual variables λ of the linear relaxation).
+-`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack,
+-`yCR`: primal solution of the Linear Relaxation associated to the variables say if we use or not a pack,
+-`λ`: dual solution of the Linear Relaxation associated to the packing constraints,
+-`μ`: dual solution of the Linear Relaxation associated to the packing constraints,
+-`objCR`: objective value of the Linear Relaxation,
+-`xLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the dual variables λ of the linear relaxation),
+-`yLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables say if we use or not a pack (using the dual variables λ of the linear relaxation),
 -`objLR`: objective value of the Knapsack Lagrangian Relaxation (using the dual variables λ of the linear relaxation). 
 """
 struct featuresCWL
@@ -28,9 +28,9 @@ end
 
 """
 # Arguments:
-	- `ins`: instance object, it should be of type instanceCWL 
+	- `ins`: instance object, it should be of type `instanceCWL`. 
 
-	solve the Continuous Relaxation and the Lagrangian Sub-Problem considering as Lagrangian Multipliers
+	Solves the Continuous Relaxation and the Lagrangian Sub-Problem considering as Lagrangian Multipliers
 	the dual variables associated to the relaxed constraints and then returns a features structure.
 """
 function create_features(ins::instanceCWL)
@@ -43,8 +43,8 @@ end
 
 """
 # Arguments:
-- `ins`: instance structure, it should be a sub-type of instanceCWL
-- `featObj`: features object containing all the characteristics 
+- `ins`: instance structure, it should be a sub-type of instanceCWL,
+- `featObj`: features object containing all the characteristics,
 - `fmt`: features matrix type.
 
 Construct the matrix of the features for a bipartite-graph representation of the instance.
@@ -101,9 +101,9 @@ end
 
 """
 # Arguments:
-- `lt`: learnign type, it should be a sub-type of learningType
-- `featObj`: features object containing all the characteristics 
-- `ins`: instance structure, it should instanceCWL
+- `lt`: learnign type, it should be a sub-type of `learningType`,
+- `featObj`: features object containing all the characteristics, 
+- `ins`: instance structure, it should `instanceCWL`,
 - `fmt`: features matrix type.
 
 Returns the bipartite graph representation with the associated nodes-features matrix.

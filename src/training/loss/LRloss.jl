@@ -37,12 +37,12 @@ end
 
 """
 # Arguments:
-- `_`: lagrangian multipliers (are not used in this implementation)
-- `v`: loss function value
-- `_`: an abstract_example
-- `_`: loss function 
+- `_`: lagrangian multipliers (are not used in this implementation),
+- `v`: loss function value,
+- `_`: an abstract_example,
+- `_`: loss function. 
 
-allows to compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
+Compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
 """
 function sub_problem_value(_, v, _, _::loss_LR)
 	return -v

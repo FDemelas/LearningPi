@@ -1,7 +1,7 @@
 """
 # Arguments
-	- `fileName` : a path to a json file that contains the data for the instance, features and labels
-	- `factory` : an instance object (for the same instance as the features file)
+	- `fileName` : a path to a json file that contains the data for the instance, features and labels,
+	- `factory` : an instance object (for the same instance as the features file).
 
 It reads the instance, the features and the labels from the json and returns three structures that contains all the informations.
 """
@@ -50,11 +50,11 @@ end
 
 """
 # Arguments:    
-- `ins`: instance structure, it should be of type CWLinstance
-- `lab`: labels structure, it should be of type labelsMCND
-- `feat`: features structure, it should be of type featuresMCND
-- `fileName`: the path to the file json where print the data
-- `factory`: instance factory should be of type cpuMCNDinstanceFactory
+- `ins`: instance structure, it should be of type `cpuMCNDinstance`,
+- `lab`: labels structure, it should be of type `labelsMCND`,
+- `feat`: features structure, it should be of type `featuresMCND`,
+- `fileName`: the path to the file json where print the data,
+- `factory`: instance factory should be of type `cpuMCNDinstanceFactory`.
 
 """
 function print_json(ins, lab, feat, fileName, factory::cpuMCNDinstanceFactory)

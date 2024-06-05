@@ -5,9 +5,10 @@
 """
 Structure that realize a multi-prediction LR (CPU) loss.
 This structure can be used as function.
+
 # Fields:
-- `α`: a penalization parameter to weight the different predictions, by default is 0.5.
-- `lr`: a loss of type `loss_LR`, automatically constructed
+- `α`: a penalization parameter to weight the different predictions, by default is 0.5,
+- `lr`: a loss of type `loss_LR`, automatically constructed.
 """
 struct loss_multi_LR <: abstract_loss
 	α::Float32

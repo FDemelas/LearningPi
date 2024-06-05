@@ -37,7 +37,7 @@ end
 
 """
 # Arguments:
-- `_`: loss function 
+- `_`: loss function.
 
 returns the device to use with this loss.
 implementationn this case GPU.
@@ -49,12 +49,12 @@ end
 
 """
 # Arguments:
-- `_`: lagrangian multipliers (are not used in this implementation)
-- `v`: loss function value
-- `example`: an abstract_example
-- `_`: loss function 
+- `_`: lagrangian multipliers (are not used in this implementation),
+- `v`: loss function value,
+- `example`: an abstract_example,
+- `_`: loss function .
 
-allows to compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
+Compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
 """
 function sub_problem_value(_, v, _, _::loss_LR_gpu)
 	return -v

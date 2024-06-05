@@ -10,10 +10,11 @@ This structure provide an implementation of the main neural-network model of thi
 - `train_mode`: if the model is in training mode or not, the main change is that if off we does not sample, but just take the mean,
 - `prediction_layers`: indexes of the main-blocks after which we want insert a Decoder to provide a Lagrangian Multipliers Prediction,
 - `where_sample`: a `SamplingPosition` to handle different possibilities of Sampling,
-- `only_last`: a boolean that says if we want only a single Lagragian Multipliers prediction associated to the last main-block
+- `only_last`: a boolean that says if we want only a single Lagragian Multipliers prediction associated to the last main-block,
 - `dt`: deviation type.
 
 The constructor of this structure have the following 
+
 # Arguments:
 - `HiddenMap`: as in the Fields,
 - `Graphormers`: as in the Fields,

@@ -4,7 +4,7 @@ abstract type abstract_loss_factory end
 
 """
 # Arguments:
-	- `_`: the loss parameters
+	- `_`: the loss parameters.
 
 	returns the device (cpu/gpu) used to compute the loss.
 	For a general loss will be CPU.
@@ -36,8 +36,8 @@ end
 
 """
 # Arguments:
-	- `x`: the solution of the Lagrangian Sub-problem
-	- `ins`: a cpuInstanceMCND structure
+	- `x`: the solution of the Lagrangian Sub-problem,
+	- `ins`: a cpuInstanceMCND structure.
 
 This function compute and returns the gradient of the sub-problem objective function w.r.t. the Lagrangian Multipliers.
 """
@@ -54,8 +54,8 @@ end
 
 """
 # Arguments:
-	- `x`: the solution of the Lagrangian Sub-problem
-	- `ins`: a cpuInstanceCWL structure
+	- `x`: the solution of the Lagrangian Sub-problem,
+	- `ins`: a cpuInstanceCWL structure.
 
 This function compute and returns the gradient of the sub-problem objective function w.r.t. the Lagrangian Multipliers.
 """
@@ -69,8 +69,8 @@ end
 
 """
 # Arguments:
-	- `x`: the solution of the Lagrangian Sub-problem
-	- `ins`: a cpuInstanceCWL structure
+	- `x`: the solution of the Lagrangian Sub-problem,
+	- `ins`: a cpuInstanceCWL structure.
 
 This function compute and returns the gradient of the sub-problem objective function w.r.t. the Lagrangian Multipliers.
 """
@@ -81,8 +81,8 @@ end
 
 """
 # Arguments:
-	- `x`: the solution of the Lagrangian Sub-problem
-	- `ins`: a cpuInstanceCWL structure
+	- `x`: the solution of the Lagrangian Sub-problem,
+	- `ins`: a cpuInstanceCWL structure.
 
 This function compute and returns the gradient of the sub-problem objective function w.r.t. the Lagrangian Multipliers.
 """

@@ -1,9 +1,7 @@
 """
-struct LayerNorm
-
-#Fields:
-- `eps`: regularization parameter
-- `d`: size of the input of the normalization layer 
+# Fields:
+- `eps`: regularization parameter,
+- `d`: size of the input of the normalization layer. 
 
 Describe the Layer Normalization for the provided parameters
 """
@@ -13,8 +11,6 @@ struct LayerNorm
 end
 
 """
-function (m::LayerNorm)(x)
-
 Perform a Layer Normalization using `x` as input .
 """
 function (m::LayerNorm)(x)

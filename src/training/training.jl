@@ -22,17 +22,15 @@ is_min_SP(ins::cpuInstanceGA) = false
 bestModels = Dict{String,Any}("loss training"=>Chain(),"GAP training"=>Chain(),"GAP CR training"=>Chain(), "loss validation"=>Chain(),"GAP validation"=>Chain(),"GAP CR validation"=>Chain())
 
 """
-function validation(currentMetrics::Dict, valSet, nn,loss::abstractLoss,  lt::learningType,dt::abstract_deviation)
-
 # Arguments:
-- `currentMetrics`: a dictionary of Float 
-- `valSet` : a vector of gnn_dataset that correspond to the validation set.
-- `nn` : a neural network model.
-- `loss`: a structure with the parameters of the loss.
-		   For other details of the parameters of a certain loss see the definition of the particular structure of the loss.
-- `loss`: loss function.
-- `lt`: learning type object.       
-- `dt`: deviation type (0 or dual of the CR)        
+- `currentMetrics`: a dictionary of Float, 
+- `valSet` : a vector of gnn_dataset that correspond to the validation set,
+- `nn` : a neural network model,
+- `loss`: a structure with the parameters of the loss,
+		   For other details of the parameters of a certain loss see the definition of the particular structure of the loss,
+- `loss`: loss function,
+- `lt`: learning type object,       
+- `dt`: deviation type (0 or dual of the CR).        
 
 This function compute different metrics over the validation set.
 The values are memorized in the dictionary.
@@ -58,35 +56,15 @@ function validation(currentMetrics::Dict, valSet, nn, loss, lt::learningType,dt:
 	end
 end
 
-#function validation(currentMetrics::Dict, valSet, nn, loss, lt::learningMultiPredTransformer)
-#	nInstVal = length(valSet)
-#	for example in valSet
-#
-#		feat = model_device(example.features)
-#		πs = nn(feat)
-#		π = πs[(size(πs)[1]-feat.gdata.u[2][1]+1):end, :]
-#
-#		v = loss(πs; example)
-#		objPred = sub_problem_value(π, v, example, loss)
-#		objGold = example.gold.objLR
-#		sp_sign=is_min_SP(example.instance) ? 1 : -1
-#
-#
-#		currentMetrics["loss validation"] +=sp_sign* v / (nInstVal)# *lengthLM(example.instance))
-#		currentMetrics["GAP validation"] += sp_sign*(objGold - objPred) / (objGold * nInstVal) * 100
-#		currentMetrics["GAP CR validation"] += (1 - (objGold - objPred) / (objGold - example.linear_relaxation)) * 100 / nInstVal
-#	end
-#end
 
 """
 function testAndPrint(currentMetrics::Dict,testSet,nn,loss,loss,lt::learningType)
 
 # Arguments:
-- `currentMetrics`: a dictionary of Float 
-- `testSet` : a vector of hingeExamples_instance that correspond to the test set.
+- `currentMetrics`: a dictionary of Floats that contains several metric for the current epoch, 
+- `testSet` : a vector of example that correspond to the test set,
 - `nn` : a neural network model.
-- `loss`: a structure with the parameters of the loss.
-			   For other details of the parameters of a certain loss see the definition of the particular structure of the loss.
+- `loss`: a structure that encode the loss function.
 - `lt`: learning type object.     
 
 This function compute different metrics over the validation set.
@@ -141,13 +119,11 @@ function testAndPrint(currentMetrics::Dict, testSet, nn, loss, lt::learningType,
 end
 
 """
-function compareWithBests(currentMetrics::Dict,bestMetrics::Dict,nn,endString::String)
-
 # Arguments:
-- `currentMetrics` : a dictionary of Float 
-- `bestMetrics` : a dictionary of Float 
-- `nn` : a neural network
-- `endString` : a string used to memorize the best models
+- `currentMetrics` : a dictionary of Float, 
+- `bestMetrics` : a dictionary of Float, 
+- `nn` : a neural network,
+- `endString` : a string used to memorize the best models.
 
 This function compare all the values in `bestMetrics` with the ones in `currentMetrics` (that corresponds to the same key).
 If some value in `currentMetrics` is better, then we update the correspondent value in `bestMetrics` and we save the model
@@ -186,13 +162,11 @@ function compareWithBests(currentMetrics::Dict, bestMetrics::Dict, nn, endString
 end
 
 """
-function print_best_models(endString::String, bestModels::Dict)
+# Arguments:
+- `endString`: Path where save the models,
+- `bestModels`: Dictionary of the best models (w.r.t different metrics) found so far.
 
-#Arguments:
-- `endString`: Path where save the models 
-- `bestModels`: Dictionary of the best models (w.r.t different metrics) found so far
-
-Print in a file BSON, located in the folder `endString` the best model found so far 
+Print in a file BSON, located in the folder `endString` the best model found so far.
 """
 function print_best_models(endString::String, bestModels::Dict)
 	for key in keys(bestModels)
@@ -206,13 +180,10 @@ function print_best_models(endString::String, bestModels::Dict)
 end	
 
 """
-function printMetrics(currentMetrics::Dict)
-
 # Arguments:
-- `currentMetrics`: a dictionary of Float
+- `currentMetrics`: a dictionary of Float.
 
-This function takes as input the dictionary of the metrics and print the values
-associated to training and validation sets.    
+This function takes as input the dictionary of the metrics and print the values associated to training and validation sets.    
 """
 function printMetrics(currentMetrics::Dict)
 	println("loss training: ", currentMetrics["loss training"])
@@ -225,11 +196,9 @@ function printMetrics(currentMetrics::Dict)
 end
 
 """
-function printBests(bestMetrics::Dict, path::String)
-
 # Arguments:
 - `bestMetrics`: a dictionary of float that contains the best values
-			   find in the training for altypel the considered metrics.
+			   find in the training for altypel the considered metrics,
 - `path`: location where print the results in a file.				
 
 Takes as input the dictionary of the best metrics and print the values in standard output and in a file defined by the `path`.                
@@ -261,20 +230,18 @@ function printBests(bestMetrics::Dict, path::String)
 end
 
 """
-function saveHP(endString::String,lr::Float32,decay::Float32,h::Vector{Int64}, opt, lt::learningType, loss,seedNN::Int64, seedDS::Int64, stepSize::Int64)
-	
 # Arguments:    
-- `endString`: a string used as name for the output file.
-- `lr`: learning rate of the algorithm.
-- `decay`: decay for the learning rate.
+- `endString`: a string used as name for the output file,
+- `lr`: learning rate of the algorithm,
+- `decay`: decay for the learning rate,
 - `h`: a list of #(hidden layers), each component of h contains the number of nodes in
-	 the associated hidden layer.
-- `opt`: optimizer
-- `lt`: learning type object.     
-- `loss`: loss function.
-- `seedDS`: random seed for the dataset generation.
-- `seedNN`: random seed for the neural network parameters.
-- `stepSize`: the step size for the decay scheduler of the optimizer
+	 the associated hidden layer,
+- `opt`: optimizer,
+- `lt`: learning type object,     
+- `loss`: loss function,
+- `seedDS`: random seed for the dataset generation,
+- `seedNN`: random seed for the neural network parameters,
+- `stepSize`: the step size for the decay scheduler of the optimizer.
 
 This function memorize all this hyper parameters in a JSON file.     
 """
@@ -297,28 +264,26 @@ function saveHP(endString::String, lr::Float32, decay::Float32, h::Vector{Int64}
 end
 
 """
-function saveHP(endString::String,lr::Float32,decay::Float32,h::Vector{Int64},opt,lt::learningType,loss,seedNN::Int64,seedDS::Int64,stepSize::Int64)
-	
 # Arguments:    
-- `endString`: a string used as name for the output file.
-- `lr`: learning rate of the algorithm.
-- `decay`: decay for the learning rate.
+- `endString`: a string used as name for the output file,
+- `lr`: learning rate of the algorithm,
+- `decay`: decay for the learning rate,
 - `h`: a list of #(hidden layers), each component of h contains the number of nodes in
-	 the associated hidden layer.
-- `opt`: optimizer
-- `lt`: learning type object.     
-- `fmt`:
-- `dt`:
-- `loss`: loss function.
-- `seedDS`: random seed for the dataset generation.
-- `seedNN`: random seed for the neural network parameters.
-- `stepSize`: the step size for the decay scheduler of the optimizer
-- `nodes_number`: size (number of nodes) in the hidden reprensentation between each layer
-- `block_number`: number of blocks in the model
-- `hI`: sizes of Dense layers in the first part, where the nodes features are sent in the hidden space
-- `hF`: sizes of Dense layers in the final
-- `dataPath`: path to the instances used in the dataset
-- `factory`: instance factory type
+	 the associated hidden layer,
+- `opt`: optimizer,
+- `lt`: learning type object,     
+- `fmt`: features matrix type,
+- `dt`: deviation type,
+- `loss`: loss function,
+- `seedDS`: random seed for the dataset generation,
+- `seedNN`: random seed for the neural network parameters,
+- `stepSize`: the step size for the decay scheduler of the optimizer,
+- `nodes_number`: size (number of nodes) in the hidden reprensentation between each layer,
+- `block_number`: number of blocks in the model,
+- `hI`: sizes of Dense layers in the first part, where the nodes features are sent in the hidden space,
+- `hF`: sizes of Dense layers in the final,
+- `dataPath`: path to the instances used in the dataset,
+- `factory`: instance factory type.
 
 This function memorize all this hyper parameters in a JSON file.     
 """
@@ -350,11 +315,10 @@ function saveHP(endString::String, lr::Float32, decay::Float32, h::Vector{Int64}
 end
 
 """
-function get_parameters(nn, lt::learningType, f = 0)
-
-- `nn` : neural network
-- `lt` : learning type
-- `f` :  ???
+# Arguments:
+- `nn` : neural network,
+- `lt` : learning type,
+- `f` :  useless parameter, removed soon.
 
 Returns the model parameters of `nn` in the case in which nn belsong to `lt` learning type.
 """
@@ -363,21 +327,19 @@ function get_parameters(nn, lt::learningType, f = 0)
 end
 
 """
-function train(maxEp::Int64, dS::Corpus, nn, opt::Optimiser, loss::abstractLoss; printEpoch::Int64=10, endString::String, lt::learningType, dt::abstract_deviation,seed::Int64,bs::Int64=1)
-
 # Arguments:
 
-- `maxEp`: the maximum number of epochs for the learning algorithm.
-- `dS`: the Corpus structure that contains the training, validation and test sets.
-- `nn`: the neural network model.
-- `opt`: the optimizer used for the training.
-- `loss`: a structure that contains the parameters α and β of the loss.
-- `printEpoch`: the number of epochs in which print the metrics of the training.
-- `endString`: the string used to memorize the output files as best models and tensorboard logs.
-- `dt`: deviation type, it could deviate from zero or the duals of the continuous relaxation.
-- `lt`: learning type
-- `seed`: random seed for the random generators
-- `bs` batch size
+- `maxEp`: the maximum number of epochs for the learning algorithm,
+- `dS`: the Corpus structure that contains the training, validation and test sets,
+- `nn`: the neural network model,
+- `opt`: the optimizer used for the training,
+- `loss`: a structure that contains the parameters α and β of the loss,
+- `printEpoch`: the number of epochs in which print the metrics of the training,
+- `endString`: the string used to memorize the output files as best models and tensorboard logs,
+- `dt`: deviation type, it could deviate from zero or the duals of the continuous relaxation,
+- `lt`: learning type,
+- `seed`: random seed for the random generators,
+- `bs` batch size.
 
 This function performs the learning with the provided inputs and save the best models in a bson file.
 """

@@ -4,6 +4,7 @@
 
 """
 Structure of parameters for loss obtained as the inverse of the sub-problem obj value.
+
 # Fields:
 -`α`: regularization term. Warning: for the moment this parameter not used!
 """
@@ -17,7 +18,7 @@ struct loss_hinge_factory <: abstract_loss_factory end
 # Arguments:
 -`:`: loss parameters, it should be a structure of type HingeLoss.   
 
-return the loss correspondent to loss paramameters of type HingeLoss
+return the loss correspondent to loss paramameters of type HingeLoss.
 """
 function create_loss(lf::loss_hinge_factory, α = 0.1)
 	return loss_hinge(α)
@@ -25,7 +26,7 @@ end
 
 """
 # Arguments:
-- `π`: lagrangian multipliers vector candidate.
+- `π`: lagrangian multipliers vector candidate,
 - `example`: dataset sample object.
   
 Computes the value of the Hinge loss.

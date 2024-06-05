@@ -3,17 +3,17 @@
 Struct containing the information of the features for an instance.
 
 # Fields:
-- `xCR`: the value of the flow variables for the optimal solution of the linear relaxation.
-- `yCR`: the value of the decision variables for the optimal solution of the linear relaxation.
-- `λ`: the value of the dual variables associated to the flow constraints, for the optimal solution of the linear relaxation.
-- `μ`: the value of the dual variables associated to the capacity constraints for the optimal solution of the linear relaxation.
-- `objCR`: the objective value of the linear relaxation.
-- `xLR`: the value of the flow variables for the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ.
-- `yLR`: the value of the design variables for the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ.
-- `LRarcs`: the objective values, for each edge, of the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ.
-- `objLR`: the objective value of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ.
-- `origins`: a matrix of size K×V the cost of the shortest path from the origin to the current node with costs in an edge e:  ins.r[k,e]+ins.f[e]/ins.c[e].
-- `destinations`: a matrix of size K×V the cost of the shortest path from the current node to the destination with costs in an edge e:  ins.r[k,e]+ins.f[e]/ins.c[e].
+- `xCR`: the value of the flow variables for the optimal solution of the linear relaxation,
+- `yCR`: the value of the decision variables for the optimal solution of the linear relaxation,
+- `λ`: the value of the dual variables associated to the flow constraints, for the optimal solution of the linear relaxation,
+- `μ`: the value of the dual variables associated to the capacity constraints for the optimal solution of the linear relaxation,
+- `objCR`: the objective value of the linear relaxation,
+- `xLR`: the value of the flow variables for the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ,
+- `yLR`: the value of the design variables for the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ,
+- `LRarcs`: the objective values, for each edge, of the optimal solution of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ,
+- `objLR`: the objective value of the sub-problem for the knapsack relaxation, considering as lagrangian multiers the vector λ,
+- `origins`: a matrix of size K×V the cost of the shortest path from the origin to the current node with costs in an edge e:  ins.r[k,e]+ins.f[e]/ins.c[e],
+- `destinations`: a matrix of size K×V the cost of the shortest path from the current node to the destination with costs in an edge e:  ins.r[k,e]+ins.f[e]/ins.c[e],
 - `distance`: a matrix of size V×V with the distance in terms of number of edges for the shortest path from each two nodes.
 """
 struct featuresMCND
@@ -34,8 +34,9 @@ end
 
 """
 # Arguments:
-  - `ins`: instance structure, should be of type cpuInstanceMCND
+  - `ins`: instance structure, should be of type cpuInstanceMCND.
 
+Create and return as output a features structure for the MCND instance `ins`.  
 """
 function create_features(ins::cpuInstanceMCND)
 
@@ -58,8 +59,8 @@ end
 
 """
 # Arguments:
-- `ins`: instance structure, it should be a sub-type of abstractInstanceMCND
-- `featObj`: features object containing all the characteristics 
+- `ins`: instance structure, it should be a sub-type of abstractInstanceMCND,
+- `featObj`: features object containing all the characteristics, 
 - `fmt`: features matrix type.
 
 Construct the matrix of the features for a bipartite-graph representation of the instance.
@@ -119,9 +120,9 @@ end
 
 """
 # Arguments:
-- `lt`: learnign type, it should be a sub-type of learningGNN
-- `featObj`: features object containing all the characteristics 
-- `ins`: instance structure, it should be a sub-type of abstractInstanceMCND
+- `lt`: learnign type, it should be a sub-type of learningGNN,
+- `featObj`: features object containing all the characteristics,
+- `ins`: instance structure, it should be a sub-type of abstractInstanceMCND.
 
 Returns the bipartite graph representation with the associated nodes-features matrix.
 """

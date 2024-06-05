@@ -1,11 +1,9 @@
 """
-struct RMSNorm
+# Fields:
+- `eps`: additive regularization parameter,
+- `sqrtd`: multiplicative regularization parameter.
 
-#Fields:
-- `eps`: additive regularization parameter
-- `sqrtd`: multiplicative regularization parameter
-
-Describe the RMS Normalization for the provided parameters
+Describe the RMS Normalization for the provided parameters.
 """
 struct RMSNorm
 	eps::Float32
@@ -13,10 +11,8 @@ struct RMSNorm
 end
 
 """
-function create_rms(d)
-
-#Arguments:
-- `d`: size of input in the input layers
+# Arguments:
+- `d`: size of input in the input layers.
 
 return a RMSNorm function.
 """

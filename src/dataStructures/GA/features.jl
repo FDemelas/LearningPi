@@ -1,11 +1,12 @@
 """
 Features structure for the Generalized Assignment instance.
+
 # Fields:
--`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack.
--`λ`: dual solution of the Linear Relaxation associated to the packing constraints.
--`μ`: dual solution of the Linear Relaxation associated to the packing constraints.
--`objCR`: objective value of the Linear Relaxation.
--`xLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the dual variables λ of the linear relaxation).
+-`xCR`: primal solution of the Linear Relaxation associated to the variables that associate one items to a pack,
+-`λ`: dual solution of the Linear Relaxation associated to the packing constraints,
+-`μ`: dual solution of the Linear Relaxation associated to the packing constraints,
+-`objCR`: objective value of the Linear Relaxation,
+-`xLR`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the dual variables λ of the linear relaxation),
 -`objLR`: objective value of the Knapsack Lagrangian Relaxation (using the dual variables λ of the linear relaxation). 
 """
 struct featuresGA
@@ -22,7 +23,7 @@ end
 
 """
 # Arguments:
-		- `ins`: instance object, it should be of type instanceGA 
+		- `ins`: instance object, it should be of type instanceGA.
 
 	read the features and returns a features structure.
 """
@@ -36,8 +37,8 @@ end
 
 """
 # Arguments:
-- `ins`: instance structure, it should be a sub-type of instanceGA
-- `featObj`: features object containing all the characteristics 
+- `ins`: instance structure, it should be a sub-type of instanceGA,
+- `featObj`: features object containing all the characteristics,
 - `fmt`: features matrix type.
 
 Construct the matrix of the features for a bipartite-graph representation of the instance.
@@ -88,9 +89,9 @@ end
 
 """
 # Arguments:
-- `lt`: learnign type, it should be a sub-type of learningType
-- `featObj`: features object containing all the characteristics 
-- `ins`: instance structure, it should instanceGA
+- `lt`: learnign type, it should be a sub-type of learningType,
+- `featObj`: features object containing all the characteristics, 
+- `ins`: instance structure, it should instanceGA,
 - `fmt`: features matrix type.
 
 Returns the bipartite graph representation with the associated nodes-features matrix.

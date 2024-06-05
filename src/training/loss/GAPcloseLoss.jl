@@ -8,7 +8,7 @@ Structure that realize a GAP closure loss.
 This structure can be used as function.
 
 # Fields:
-- `lr`: a lagranian sub-problem loss of type `loss_LR`
+- `lr`: a lagranian sub-problem loss of type `loss_LR`.
 
 The constructor need no paramameters.
 """
@@ -46,12 +46,12 @@ Flux.@functor loss_GAP_closure
 
 """
 # Arguments:
-- `_`: lagrangian multipliers (are not used in this implementation)
-- `v`: loss function value
-- `example`: an abstract_example
-- `_`: loss function 
+- `_`: lagrangian multipliers (are not used in this implementation),
+- `v`: loss function value,
+- `example`: an abstract_example,
+- `_`: loss function. 
 
-allows to compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
+Compute the sub-problem value without solving the Lagrangian Sub-Problem, if it is already solved during the computation of the loss.
 """
 function sub_problem_value(_, v, example::abstract_example, _::loss_GAP_closure)
 	return -v * (example.gold.objLR - example.linear_relaxation) / 100

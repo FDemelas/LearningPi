@@ -40,7 +40,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the constraints. In this case 6.
 """
@@ -50,7 +50,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the constraints. In this case 6.
 """
@@ -60,7 +60,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the constraints. In this case 4.
 """
@@ -70,7 +70,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the variables. In this case 4.
 """
@@ -80,7 +80,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the variables. In this case 4.
 """
@@ -90,7 +90,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `cr_features_matrix`).
 
 returns the size of the features associated to the variables. In this case 2.
 """
@@ -100,7 +100,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be cr_features_matrix) 
+-`fmt`: feature matrix type (it shoul be `cr_features_matrix`) 
 """
 function get_cr_features(_::cr_features_matrix, x, y, _)
 	return Float32[x, y]
@@ -108,7 +108,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be lr_features_matrix) 
+-`fmt`: feature matrix type (it should be `lr_features_matrix`).
 """
 function get_cr_features(_::lr_features_matrix, _, _, z)
 	return Float32[z]
@@ -116,7 +116,7 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be without_cr_features_matrix)
+-`fmt`: feature matrix type (it should be `without_cr_features_matrix`).
 
 in this case we have no CR features and it returns an empty vector.
 """
@@ -127,13 +127,13 @@ end
 
 """
 # Arguments:
--`fmt`: feature matrix type (it shoul be without_cr_features_matrix) 
+-`fmt`: feature matrix type (it should be `without_cr_features_matrix`).
 
 Preprocess the edge weights of the bipartite graph representation of the instance.
 One edges correspond to a pair (variable, constraint).
 In this project are for the moment implemented three choices:
-	- all ones weights
-	- weights equal to the coefficients of the variable in the constraints 
+	- all ones weights,
+	- weights equal to the coefficients of the variable in the constraints,
 	- a modification of the last to assure positive weights.
 """
 function preprocess_weight(fmt::abstract_features_matrix, value::Real)

@@ -42,14 +42,13 @@ end
 
 """
 # Arguments:
-
-- `featType` : the type of the features instance.
-- `folder` : the path to the directory that contains the json files that defines the instances (and the associated features and labels).
-- `maxInstance` : a vector with three components. 
-   that say how many instances take for the training/validation/test set.
-- `seed` : a random seed used to select which instaces consider in the training/validation/test sets.
-- `factory`: type of instance.
-- `pTrain` : The percentage of training instances in the provided folder.
+- `featType` : the type of the features instance,
+- `folder` : the path to the directory that contains the json files that defines the instances (and the associated features and labels),
+- `maxInstance` : a vector with three components,
+   that say how many instances take for the training/validation/test set,
+- `seed` : a random seed used to select which instaces consider in the training/validation/test sets,
+- `factory`: type of instance,
+- `pTrain` : The percentage of training instances in the provided folder,
 - `pVal` : The percentage of validation instances in the provided folder.
 
 Create a Corpus, that is a structure with three DataSet field for training,validation and test dataset.
@@ -86,15 +85,15 @@ end
 
 """
 # Arguments:
-- `featType` : the type of the features instance.
-- `folder` : the path to the directory that contains the json files that defines the instances (and the associated features and labels).
-- `maxInstance` : a vector with three components. 
-   that say how many instances take for the training/validation/test set.
-- `seed` : a random seed used to select which instaces consider in the training/validation/test sets.
-- `factory`: type of instance.
+- `featType` : the type of the features instance,
+- `folder` : the path to the directory that contains the json files that defines the instances (and the associated features and labels),
+- `maxInstance` : a vector with three components,
+   that say how many instances take for the training/validation/test set,
+- `seed` : a random seed used to select which instaces consider in the training/validation/test sets,
+- `factory`: type of instance,
 - `k`: the fold that we want select as test set. Note: 1 <= k <= 10.
 
-Create a Corpus, that is a struct with three DataSet field for training/validation/test set
+Create a Corpus, that is a struct with three DataSet field for training/validation/test set.
 """
 function createKfold(featType::learningType, fmt::abstract_features_matrix, folder::String, maxInstance::Vector{Int64} = [-1, -1, -1], seed::Int64 = 0; factory::abstractInstanceFactory = cpuMCNDinstanceFactory(), k::Int64 = 1)
 	directory = folder .* readdir(folder)
@@ -134,12 +133,12 @@ end
 
 """
 # Arguments:
-- `example`: the current example (dataset point).
-- `objPred`: the current obective for the example.
-- `objGold`: the optimal value of the Lagrangian Dual.
+- `example`: the current example (dataset point),
+- `objPred`: the current obective for the example,
+- `objGold`: the optimal value of the Lagrangian Dual,
 - `nInst`: the number of the instances in the set.
 
-compute the GAP of the instance in the `example` using the predicted objective `objPred`.
+Computes the GAP of the instance in the `example` using the predicted objective `objPred`.
 """
 function gap(example::abstract_example, objPred::Real, objGold::Real, nInst::Real)
 	if typeof(example.instance) <: instanceGA
@@ -151,12 +150,12 @@ end
 
 """
 # Arguments:
-- `example`: the current example (dataset point).
-- `objPred`: the current obective for the example.
-- `objGold`: the optimal value of the Lagrangian Dual.
+- `example`: the current example (dataset point),
+- `objPred`: the current obective for the example,
+- `objGold`: the optimal value of the Lagrangian Dual,
 - `nInst`: the number of the instances in the set.
 
-compute the closure GAP of the instance in the `example` using the predicted objective `objPred`.
+Computes the closure GAP of the instance in the `example` using the predicted objective `objPred`.
 The closure is w.r.t. the value of the Lagrangian Sub-Problem, solved with the dual variables of the continuous relaxation.
 """
 function gap_closure(example::abstract_example, objPred::Real, objGold::Real, nInst::Real)

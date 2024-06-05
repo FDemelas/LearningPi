@@ -1,8 +1,9 @@
 """
 Label structure for the Generalized Assignment Problem.
+
 	# Fields:
-	-`π`: optimal lagrangian multipliers vector.
-	-`xLR`: primal solution of the Lagrangian Subproblem with optimal Lagrangian multipliers.
+	-`π`: optimal lagrangian multipliers vector,
+	-`xLR`: primal solution of the Lagrangian Subproblem with optimal Lagrangian multipliers,
 	-`objLR`: optimal value of the Lagrangian Dual.
 """
 struct labelsGA
@@ -13,20 +14,21 @@ end
 
 """
 # Arguments:
-	-`π`: optimal lagrangian multipliers vector.
-	-`x`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the optimal Lagrangian multipliers).
-	-`objLR`: optimal value of the Lagrangian Dual
+	-`π`: optimal lagrangian multipliers vector,
+	-`x`: primal solution of the Knapsack Lagrangian Relaxation associated to the variables that associate one items to a pack (using the optimal Lagrangian multipliers),
+	-`objLR`: optimal value of the Lagrangian Dual,
+	- `ins`: instance object, it should be of type `instanceGA`.
 
-Given all the fields construct a label structure for the Bin Packing Problem.
+Given all the fields construct a label structure for the Generalized Assignment Problem.
 """
 createLabels(π, x, objLR, ins::instanceGA) = labelsGA(π, x, objLR)
 
 """
 # Arguments:
-		- `fileLabel`: the path to the file where to find labels informations
-		- `ins`: instance object, it should be sub-type of instanceGA 
+		- `fileLabel`: the path to the file where to find labels informations,
+		- `ins`: instance object, it should be of type `instanceGA`. 
 
-	read the labels and returns a labels structure.
+	Reads the labels and returns a labels structure.
 """
 function read_labels(fileLabel::String, ins::instanceGA)
 	π = zeros(Float32, ins.I)
