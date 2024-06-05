@@ -1,7 +1,7 @@
 # Learning_Lagrangian_Multipliers.jl
 [![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://fdemelas.github.io/Learning_Lagrangian_Multipliers.jl/dev/)
 [![Documentation](https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl/actions/workflows/documentation.yml/badge.svg?branch=main)](https://github.com/FDemelas/Learning_Lagrangian_Multipliers.jl/actions/workflows/documentation.yml)
-
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
 This package provides the implementation of the learning framework presented in: 
 
@@ -19,27 +19,11 @@ https://github.com/FDemelas/datasets_learningPi
 
 ## Getting started
 
-```
-julia --project=.
-```
-
-or equivalently:
-
-```
-julia
-```
-
-and then once in Julia
+To install all the dependencies it is sufficient to use this commands in Julia:
 
 ```julia
 using Pkg;
 Pkg.activate(".");
-```
-
-To install all the dependencies it is sufficient to use this commands:
-
-```julia
-using Pkg;
 Pkg.instantiate();
 ```
 
@@ -47,7 +31,9 @@ If you find some problem with the package Instances.jl you can install it using:
 
  ```julia
 using Pkg
+Pkg.activate(".");
 Pkg.add(url="https://github.com/FDemelas/Instances")
+Pkg.instantiate();
 ```
 
 then the package can be used 
@@ -57,8 +43,6 @@ using LearningPi
 ```
 
 ## License
-
-Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
 
 This work is licensed under a
 [Creative Commons Attribution 4.0 International License][cc-by].
