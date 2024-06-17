@@ -32,7 +32,7 @@ Pkg.instantiate();
 
 If you find some problem with the package Instances.jl you can install it using:
 
- ```julia
+```julia
 using Pkg
 Pkg.activate(".");
 Pkg.add(url="https://github.com/FDemelas/Instances")

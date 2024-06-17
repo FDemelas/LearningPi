@@ -19,7 +19,7 @@ makedocs(;
 	"Machine Learning Models" => "Models.md",
 	"Sampling Mechanism" => "Sampling.md", 
         "Training Scripts" => "Training.md", 
-        "API reference" => "api.md"
+        "API reference" => ["API index" => "api.md", "Public APIs" => "api_public.md", "Private APIs" => "api_private.md"]
     ]
 )
 

@@ -1,20 +1,4 @@
-# API for learning_pi.jl
-
-## Index
+# API index for learning_pi.jl
 
 ```@index
-```
-
-## Public
-
-```@autodocs
-Modules = [LearningPi]
-Private = false
-```
-
-## Private
-
-```@autodocs
-Modules = [LearningPi]
-Public= false
 ```
