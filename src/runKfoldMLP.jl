@@ -5,12 +5,9 @@ using Flux
 using Dates
 using JSON
 
-MaxEp = 300
 maxInst = [-1, -1, -1]
 
 """
-main(args)
-
 Main function to perform the training using the k-fold, for a given k as test.
 This function takes some arguments as input considering ArgParse, the description of that parameters 
 can be found in the body of this function.    
@@ -48,7 +45,7 @@ function main(args)
 		"--maxEp"
 		nargs = '?'
 		arg_type = Int64
-		default = 1000
+		default = 300
 		help = "Maximum number of epochs"
 		"--stepSize"
 		nargs = '?'
@@ -95,9 +92,8 @@ function main(args)
 
 	corpus_info, dS = createKfold(lt,fmt, data, maxInst, parsed_args["seed"]; factory = factory, k = parsed_args["kFold"])
 
-	lossParam = lossFromParams(parsed_args["lossType"][1], parsed_args["lossParams"])
-	loss = createLoss(lossParam)
-
+	loss = lossFromParams(parsed_args["lossType"][1], parsed_args["lossParams"])
+	
 	# construct the optimizer with exponential decay
 	lrDecay = Flux.Optimise.ExpDecay(1, parsed_args["decay"], parsed_args["stepSize"], 1e-8, 1)
 	opt = Flux.Optimiser(RAdam(parsed_args["lr"]), ClipNorm(1), lrDecay)
@@ -110,22 +106,15 @@ function main(args)
                 JSON.print(f, corpus_info)  # parse and transform data
     end
 
+	LearningPi.saveHP(endString, parsed_args["lr"], parsed_args["decay"], h, opt, lt, loss, parsed_args["seed"], parsed_args["seed"], parsed_args["stepSize"])
 
-	LearningPi.saveHP(endString, parsed_args["lr"], parsed_args["decay"], h, opt, lt, lossParam, loss, parsed_args["seed"], parsed_args["seed"], parsed_args["stepSize"])
-
-	#acct(x)=-Flux.softplus(x)	
-	#final_A=contains(data,"GA") ? acct : identity
-	
 	final_A=identity
 	nn = create_model(lt, LearningPi.sizeFeatures(lt, dS), h, 1, relu, parsed_args["seed"];final_A)
 	
-	train(parsed_args["maxEp"], dS, nn, opt, lossParam; printEpoch = 100, endString = endString, lt,dt,seed=parsed_args["seed"])
-
+	train(parsed_args["maxEp"], dS, nn, opt, loss; printEpoch = 100, endString = endString, lt,dt,seed=parsed_args["seed"])
 end
 
 """
-lossFromParams(lossType::String,lossParams::Vector{Float32})
-
 Construct a loss object taking as inputs a string for the loss type and a vector for the loss parameters.
 
 # Arguments:
@@ -134,22 +123,22 @@ Construct a loss object taking as inputs a string for the loss type and a vector
 """
 function lossFromParams(lossType::String, lossParams::Vector{Float32})
 	if lossType == "GAPloss"
-		return LearningPi.GAPloss(lossParams[1])
+		return LearningPi.loss_GAP()
 	end
 	if lossType == "LRloss"
-		return LearningPi.LRloss(lossParams[1])
+		return LearningPi.loss_LR()
 	end
 	if lossType == "GPULRloss"
-		return LearningPi.GPULRloss(lossParams[1])
+		return LearningPi.loss_LR_gpu()
 	end
 	if lossType == "GAPcloseLoss"
-		return LearningPi.GAPcloseLoss(lossParams[1])
+		return LearningPi.loss_GAP_closure()
 	end
 	if lossType == "MSE"
-		return LearningPi.MSEloss(lossParams[1])
+		return LearningPi.loss_mse()
 	end
 	if lossType == "HingeLoss"
-		return LearningPi.HingeLoss(LearningPi.perturbationAdditive(lossParams[1], lossParams[2], MersenneTwister(1), lossParams[3]))
+		return LearningPi.loss_hinge(lossParams[1])
 	end
 end
 

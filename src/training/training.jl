@@ -175,7 +175,7 @@ function print_best_models(endString::String, bestModels::Dict)
 			sKey *= s[1:min(3,end)]
 		end
 		sKey*="_"
-		@save "run/HL_" * endString * "/"* sKey * endString * ".bson" nn=bestModels[key]
+		@save "run/HL_" * endString * "/"* sKey * endString * ".bson" nn=cpu(bestModels[key])
 	end
 end	
 

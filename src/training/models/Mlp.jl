@@ -21,9 +21,12 @@ function create_model(lType::learningMLP, in, h, out = 1, a = relu, seed = 1; fi
 	h = cat([in], h, dims = 1)
 	init = Flux.truncated_normal(Flux.MersenneTwister(seed); mean = 0.0, std = 0.0001)
 	layers = [Dense(h[i] => h[i+1], a; init = init) for i in 1:(length(h)-1)]# init=Flux.truncated_normal(std=0.1,lo=-0.1,hi=0.1)
-	model = Chain(layers..., Dense(h[end] => out, final_A; init = init), X -> dropdims(X, dims = 1)) |> model_device
-	return model
+	model = Chain(layers..., Dense(h[end] => out, final_A; init = init), DropDimsL) 
+	model = model_device(model)
+	return model 
 end
+
+DropDimsL(X) = dropdims(X, dims = 1)
 
 """
 # Arguments:
@@ -152,18 +155,18 @@ function forwardBackward(trainSet, nn, currentMetrics, opt, loss, epoch, lt::lea
 		zCR = example.features[1, :, :] |> model_device
 		let π, v
 			grad = gradient(par) do
-				π = dropdims(nn(feat), dims = 1)
+				π = nn(feat) # dropdims(nn(feat), dims = 1)
 				π += zCR
 				π = device(is_min_SP(example.instance) * π)
 				v = loss(π |> device; example)
 			end
 
 			objPred = sub_problem_value(π, v, example, loss)
-
+			sp_sign=is_min_SP(example.instance) ? 1 : -1
 			objGold = example.gold.objLR
-
-			currentMetrics["loss training"] += v / (nInst)
-			currentMetrics["GAP training"] += (objGold - objPred) / (objGold * nInst) * 100
+	
+			currentMetrics["loss test"]   += sp_sign*v / (nInst)
+			currentMetrics["GAP test"]    += sp_sign*(objGold - objPred) / (objGold * nInst) * 100
 			currentMetrics["GAP CR training"] += (1 - (objGold - objPred) / (objGold - example.linear_relaxation)) / nInst * 100
 
 			Flux.update!(opt, par, grad)
@@ -189,6 +192,16 @@ end
 In this case only returns the model `nn`.
 """
 function load_model(nn, lt::learningMLP)
+	return nn
+end
+
+"""
+# Arguments:
+	-`nn`: neural network model.
+
+In this case only returns the model `nn`.
+"""
+function get_model(nn::Chain)
 	return nn
 end
 

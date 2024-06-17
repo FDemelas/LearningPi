@@ -82,8 +82,6 @@ function features_matrix(ins::abstractInstanceMCND, featObj::featuresMCND, fmt::
 	obj, xLR0, yLR0 = (typeof(fmt) == lr_features_matrix) ? LR(ins, λ0) : (0, zeros(size(featObj.xCR)), zeros(size(featObj.yCR)))
 	μ0 = (typeof(fmt) == lr_features_matrix) ? sum(xLR0, dims = 1) - ins.c' : zeros(size(featObj.yCR))
 
-
-
 	current_idx = 1
 	for i in 1:V
 		for k in 1:K
