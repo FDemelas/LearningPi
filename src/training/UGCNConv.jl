@@ -7,7 +7,7 @@ struct UGCNConv{W <: AbstractMatrix, B, F} <: GNNLayer
     use_edge_weight::Bool
 end
 
-GraphNeuralNetworks.@functor UGCNConv
+Flux.@functor UGCNConv
 
 function UGCNConv(ch::Pair{Int, Int}, σ = identity;
                  init = glorot_uniform,

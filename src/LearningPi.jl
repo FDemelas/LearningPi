@@ -1,7 +1,7 @@
 module LearningPi
 
 using ArgParse
-using Flux: Adam, ADAM, RMSProp, RAdam, AdaMax, AMSGrad, NAdam, AdamW, AdaBelief, Momentum, Descent, Dense, relu, gradient, Chain, ExpDecay, Parallel, ClipNorm, Optimiser, Flux, σ, gpu, cpu, BatchNorm, Dropout, softplus
+using Flux: Adam,  RMSProp, RAdam, AdaMax, AMSGrad, NAdam, AdamW, AdaBelief, Momentum, Descent, Dense, relu, gradient, Chain, ExpDecay, Parallel, ClipNorm, Optimiser, Flux, σ, gpu, cpu, BatchNorm, Dropout, softplus
 using MLUtils
 using JuMP, HiGHS
 using Dates

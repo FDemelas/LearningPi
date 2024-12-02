@@ -184,7 +184,7 @@ println(lt," ", typeof(fmt)," ", data," ", maxInst," ", seed, " ",factory, " ", 
 	
 	# construct the optimizer with exponential decay
 	lrDecay = Flux.Optimise.ExpDecay(1.0, parsed_args["decay"], parsed_args["stepSize"], 1e-10, 1)
-	opt = Flux.Optimiser(ADAM(parsed_args["lr"]), ClipNorm(5), lrDecay)
+	opt = Flux.Optimiser(Adam(parsed_args["lr"]), ClipNorm(5), lrDecay)
 
 	# construct the string used to memorize the results
 	endString =
